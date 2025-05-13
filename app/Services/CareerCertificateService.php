@@ -111,12 +111,24 @@ class CareerCertificateService
         $issuerPosition = $certificate->issuerPosition;
 
         // PDF 생성
-        $pdf = PDF::loadView('certificates.career', [
+        $pdf = PDF::loadView('statements.career', [
             'certificate' => $certificate,
             'user' => $user,
             'careerRecords' => $careerRecords,
             'totalExperience' => $totalExperience,
             'issuerPosition' => $issuerPosition
+        ]);
+
+        // 한글 폰트 지원을 위한 옵션 설정
+        $pdf->setOptions([
+            'defaultFont' => 'NanumGothic',
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true,
+            'isFontSubsettingEnabled' => true,
+            'isPhpEnabled' => true,
+            'defaultMediaType' => 'screen',
+            'defaultPaperSize' => 'a4',
+            'dpi' => 150
         ]);
 
         // 저장 경로 생성

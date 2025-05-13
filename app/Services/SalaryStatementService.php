@@ -154,6 +154,18 @@ class SalaryStatementService
             'paymentInfo' => $paymentInfo
         ]);
 
+        // 한글 폰트 지원을 위한 옵션 설정
+        $pdf->setOptions([
+            'defaultFont' => 'NanumGothic',
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true,
+            'isFontSubsettingEnabled' => true,
+            'isPhpEnabled' => true,
+            'defaultMediaType' => 'screen',
+            'defaultPaperSize' => 'a4',
+            'dpi' => 150
+        ]);
+
         // 저장 경로 생성
         $filePath = 'statements/' . $user->id . '/' . $statement->certificate_number . '.pdf';
         $fullPath = storage_path('app/public/' . $filePath);
