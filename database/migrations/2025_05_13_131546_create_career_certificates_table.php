@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('career_certificates', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->date('issue_date');
+            $table->string('certificate_number')->unique();
+            $table->string('purpose')->nullable();
+            $table->foreignId('issuer_position_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('issued_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->string('pdf_path')->nullable();
             $table->timestamps();
         });
     }

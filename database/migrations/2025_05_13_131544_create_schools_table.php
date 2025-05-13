@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('address')->nullable();
+            $table->string('type')->nullable(); // '초등학교', '중학교' 등
+            $table->string('region')->nullable();
             $table->timestamps();
         });
     }

@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('salary_statements', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('school_id')->nullable()->constrained()->nullOnDelete();
+            $table->integer('year');
+            $table->integer('month');
+            $table->date('payment_date');
+            $table->string('certificate_number')->unique();
+            $table->foreignId('issued_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->enum('status', ['draft', 'issued', 'viewed'])->default('draft');
+            $table->string('pdf_path')->nullable();
             $table->timestamps();
         });
     }

@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('career_records', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('instructor_type_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('subject_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('school_id')->nullable()->constrained()->nullOnDelete();
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
+            $table->integer('hours_per_week')->nullable();
+            $table->string('position')->nullable();
+            $table->text('description')->nullable();
+            $table->boolean('is_current')->default(false);
             $table->timestamps();
         });
     }
